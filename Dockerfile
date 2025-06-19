@@ -1,3 +1,4 @@
+
 FROM postgres:latest
 
 LABEL org.opencontainers.image.title="PostgreSQL"
@@ -12,6 +13,8 @@ RUN apt-get update && apt-get install -y \
     libcurl4-openssl-dev \
     libsodium-dev \
     ca-certificates \
+    libssl-dev \
+    pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone and build pg_net
@@ -35,6 +38,13 @@ RUN git clone https://github.com/michelp/pgsodium.git \
     && make install \
     && cd .. && rm -rf pgsodium
 
+# Clone and build the http extension
+RUN git clone https://github.com/pramsey/pgsql-http.git \
+    && cd pgsql-http \
+    && make \
+    && make install \
+    && cd .. && rm -rf pgsql-http
+
 # Copy configuration files to both locations to ensure they're available
 COPY config/generate_pgsodium_key.sh /etc/postgresql/generate_pgsodium_key.sh
 COPY config/postgresql.conf /etc/postgresql/postgresql.conf
@@ -54,3 +64,4 @@ RUN apt-get purge -y --auto-remove build-essential git postgresql-server-dev-all
 
 # Set default command with custom config
 CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
+

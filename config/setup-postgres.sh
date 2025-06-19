@@ -25,6 +25,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
   CREATE EXTENSION IF NOT EXISTS pg_net;
   CREATE EXTENSION IF NOT EXISTS pg_cron;
   CREATE EXTENSION IF NOT EXISTS pgsodium;
+  CREATE EXTENSION IF NOT EXISTS http;
 EOSQL
 
 echo "PostgreSQL extensions have been created."
