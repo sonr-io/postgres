@@ -14,19 +14,19 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone and build pg_net (with specific version for reproducibility)
-RUN git clone --branch v0.7.2 https://github.com/supabase/pg_net.git \
+RUN git clone https://github.com/supabase/pg_net.git \
     && cd pg_net \
     && make \
     && make install
 
 # Clone and build pg_cron (with specific version for reproducibility)
-RUN git clone --branch v1.5.2 https://github.com/citusdata/pg_cron.git \
+RUN git clone https://github.com/citusdata/pg_cron.git \
     && cd pg_cron \
     && make \
     && make install
 
 # Clone and build pgsodium (with specific version for reproducibility)
-RUN git clone --branch v3.1.8 https://github.com/michelp/pgsodium.git \
+RUN git clone https://github.com/michelp/pgsodium.git \
     && cd pgsodium \
     && make \
     && make install
