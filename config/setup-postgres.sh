@@ -9,8 +9,8 @@ done
 
 # Copy configuration files to the correct location
 echo "Copying PostgreSQL configuration files..."
-cp /docker-entrypoint-initdb.d/postgresql.conf "$PGDATA/postgresql.conf"
-cp /docker-entrypoint-initdb.d/pg_hba.conf "$PGDATA/pg_hba.conf"
+cp /etc/postgresql/postgresql.conf "$PGDATA/postgresql.conf"
+cp /etc/postgresql/pg_hba.conf "$PGDATA/pg_hba.conf"
 
 # Set permissions
 chmod 600 "$PGDATA/postgresql.conf" "$PGDATA/pg_hba.conf"
@@ -28,3 +28,4 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
 EOSQL
 
 echo "PostgreSQL extensions have been created."
+
