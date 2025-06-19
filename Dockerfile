@@ -1,5 +1,8 @@
-FROM postgres:15
-# Support for multi-architecture builds (amd64, arm64)
+FROM postgres:latest
+
+LABEL org.opencontainers.image.title="PostgreSQL"
+LABEL org.opencontainers.image.source="https://github.com/sonr-io/postgres"
+LABEL org.opencontainers.image.description="A custom PostgreSQL image with additional extensions for development purposes."
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
