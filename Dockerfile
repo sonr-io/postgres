@@ -28,6 +28,7 @@ RUN git clone https://github.com/michelp/pgsodium.git \
     && make install
 
 # Copy configuration files
+COPY config/generate_pgsodium_key.sh /etc/postgresql/generate_pgsodium_key.sh
 COPY config/postgresql.conf /etc/postgresql/postgresql.conf
 COPY config/pg_hba.conf /etc/postgresql/pg_hba.conf
 COPY config/setup-postgres.sh /docker-entrypoint-initdb.d/
